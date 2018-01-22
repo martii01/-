@@ -28,14 +28,16 @@ public class SecondProject {
         byte mistakes2 = 0;
         int number;
 
-        //Държави
+        //Континенти
         String europe = "Европа";
         String africa = "Африка";
         String asia = "Азия";
         String northAmerica = "Северна Америка";
         String southAmerica = "Южна Америка";
         String australiaAndOceania = "Австралия и Океания";
+        String antarctica = "Антарктида";
 
+        //Държави
         String capital1 = "1";
         String capital2 = "1";
         String capitalsInEurope[][] = {
@@ -199,18 +201,93 @@ public class SecondProject {
                 {"Турция", "Анкара"},
         };
 
+        String capitalsInNorthAmerica[][] = {
+                {"Американски Вирджински острови", "Шарлот Амали"},
+                {"Ангуила", "Вали"},
+                {"Антигуа и Барбуда", "Сейнт Джонс"},
+                {"Гватемала", "Гватемала"},
+                {"Барбадос", "Бриджтаун"},
+                {"Бахамски острови", "Насау"},
+                {"Белиз", "Белмопан"},
+                {"Гренада", "Сейнт Джорджис"},
+                {"Гренландия", "Нуук"},
+                {"Доминика", "Розо"},
+                {"Доминиканска република", "Санто Доминго"},
+                {"Канада", "Отава"},
+                {"Коста Рика", "Сан Хосе"},
+                {"Куба", "Хавана"},
+                {"Кюрасао", "Филипсбург"},
+                {"Мексико", "Мексико"},
+                {"Никарагуа", "Манагуа"},
+                {"Панама", "Панама"},
+                {"Пуерто Рико", "Сан Хуан"},
+                {"Салвадор", "Сан Салвадор"},
+                {"Сейнт Винсент и Гренадини", "Кингстаун"},
+                {"Сейнт Китс и Невис", "Бастер"},
+                {"Сейнт Лусия", "Кастрийс"},
+                {"Синт Мартен", "Филипсбург"},
+                {"Съединени американски щати", "Вашингтон"},
+                {"Тринидад и Тобаго", "Порт ъф Спейн"},
+                {"Хаити", "Порт о Пренс"},
+                {"Хондурас", "Тегусигалпа"},
+                {"Ямайка", "Кингстън"},
+                {"Аруба", "Оранестад"}
+        };
+
+        String capitalsInSouthAmerica[][] = {
+                {"Аржентина", "Буенос Айрес"},
+                {"Боливия", "Сукре"},
+                {"Бразилия", "Бразилия"},
+                {"Венецуела", "Каракас"},
+                {"Гвиана", "Джорджтаун"},
+                {"Еквадор", "Кито"},
+                {"Колумбия", "Богота"},
+                {"Панама", "Панама"},
+                {"Парагвай", "Асунсион"},
+                {"Перу", "Лима"},
+                {"Суринам", "Парамарибо"},
+                {"Уругвай", "Монтевидео"},
+                {"Чили", "Сантяго де Чиле"},
+        };
+
+        String capitalsInAustraliaAndOceania[][] = {
+                {"Австралия", "Канбера"},
+                {"Нова Зеландия", "Уелингтън"},
+                {"Индонезия", "Джакарта"},
+                {"Фиджи", "Сува"},
+                {"Нова Каледония", "Нумеа"},
+                {"Папуа Нова Гвинея", "Порт Морсби"},
+                {"Соломонови острови", "Хониара"},
+                {"Вануату", "Порт Вила"},
+                {"Микронезия", "Паликир"},
+                {"Кирибати", "Южна Тарауа"},
+                {"Маршалови острови", "Маджуро"},
+                {"Науру", "Ярен"},
+                {"Палау", "Мелекеок"},
+                {"Самоа", "Апия"},
+                {"Тонга", "Нуку'алофа"},
+                {"Тувалу", "Фунафути"},
+        };
+
         // Въвеждане на континент и разпознаване, дали има такъв или няма (на кирилица)
         System.out.println("Въведете континент, на който искате да познаете столиците");
         String continent;
         do {
             continent = input.nextLine();
+            if (continent.equalsIgnoreCase(antarctica)) {
+                System.out.println("Това е континент, но на него няма държави");
+                System.out.println("Моля задай друг контитент, написан на кирилица");
+            }
             if (!continent.equalsIgnoreCase(europe) && !continent.equalsIgnoreCase(africa) &&
-                    !continent.equalsIgnoreCase(asia)) {
+                    !continent.equalsIgnoreCase(asia) && !continent.equalsIgnoreCase(northAmerica) &&
+                    !continent.equalsIgnoreCase(southAmerica) && !continent.equalsIgnoreCase(australiaAndOceania)
+                    && !continent.equalsIgnoreCase(antarctica)) {
                 System.out.println("Това не е континент, написан на кирилица, пробвай пак");
             }
 
         } while (!continent.equalsIgnoreCase(europe) && !continent.equalsIgnoreCase(africa) &&
-                !continent.equalsIgnoreCase(asia));
+                !continent.equalsIgnoreCase(asia) && !continent.equalsIgnoreCase(northAmerica) &&
+                !continent.equalsIgnoreCase(southAmerica) && !continent.equalsIgnoreCase(australiaAndOceania));
 
         //Държави в Европа
 
@@ -229,7 +306,7 @@ public class SecondProject {
                         }
                     } while (!capital1.matches(regex));
                 }
-                //Играч 1 въвежда столицата на държавата
+                //Играч 2 въвежда столицата на държавата
                 if (mistakes2 != 3) {
                     System.out.println("Ред е на " + nameOfSecondPlayer + "!");
                     do {
@@ -256,7 +333,7 @@ public class SecondProject {
                             System.out.println("");
                         }
                         if (mistakes1 == 2) {
-                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живот");
                             System.out.println("");
                         }
                         if (mistakes1 == 3) {
@@ -265,7 +342,7 @@ public class SecondProject {
                         }
                     }
                 }
-                //Проверка на точките на играч 1!
+                //Проверка на точките на играч 2!
                 if (mistakes2 != 3) {
                     if (capitalsInEurope[number][1].equalsIgnoreCase(capital2)) {
                         score2++;
@@ -273,16 +350,16 @@ public class SecondProject {
                         System.out.println("Точките на " + nameOfSecondPlayer + " са: " + score2);
                         System.out.println("");
                     }
-                    //Проверка на животите на играч 1!
+                    //Проверка на животите на играч 2!
                     else {
                         mistakes2++;
                         System.out.println("Грешен отговор за " + nameOfSecondPlayer + "!");
                         if (mistakes2 == 1) {
-                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живота");
                             System.out.println("");
                         }
                         if (mistakes2 == 2) {
-                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живот");
                             System.out.println("");
                         }
                         if (mistakes2 == 3) {
@@ -311,7 +388,7 @@ public class SecondProject {
                         }
                     } while (!capital1.matches(regex));
                 }
-                //Играч 1 въвежда столицата на държавата
+                //Играч 2 въвежда столицата на държавата
                 if (mistakes2 != 3) {
                     System.out.println("Ред е на " + nameOfSecondPlayer + "!");
                     do {
@@ -338,7 +415,7 @@ public class SecondProject {
                             System.out.println("");
                         }
                         if (mistakes1 == 2) {
-                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живот");
                             System.out.println("");
                         }
                         if (mistakes1 == 3) {
@@ -347,7 +424,7 @@ public class SecondProject {
                         }
                     }
                 }
-                //Проверка на точките на играч 1!
+                //Проверка на точките на играч 2!
                 if (mistakes2 != 3) {
                     if (capitalsInAfrica[number][1].equalsIgnoreCase(capital2)) {
                         score2++;
@@ -355,16 +432,16 @@ public class SecondProject {
                         System.out.println("Точките на " + nameOfSecondPlayer + " са: " + score2);
                         System.out.println("");
                     }
-                    //Проверка на животите на играч 1!
+                    //Проверка на животите на играч 2!
                     else {
                         mistakes2++;
                         System.out.println("Грешен отговор за " + nameOfSecondPlayer + "!");
                         if (mistakes2 == 1) {
-                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живота");
                             System.out.println("");
                         }
                         if (mistakes2 == 2) {
-                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живот");
                             System.out.println("");
                         }
                         if (mistakes2 == 3) {
@@ -392,7 +469,7 @@ public class SecondProject {
                         }
                     } while (!capital1.matches(regex));
                 }
-                //Играч 1 въвежда столицата на държавата
+                //Играч 2 въвежда столицата на държавата
                 if (mistakes2 != 3) {
                     System.out.println("Ред е на " + nameOfSecondPlayer + "!");
                     do {
@@ -419,7 +496,7 @@ public class SecondProject {
                             System.out.println("");
                         }
                         if (mistakes1 == 2) {
-                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живот");
                             System.out.println("");
                         }
                         if (mistakes1 == 3) {
@@ -428,7 +505,7 @@ public class SecondProject {
                         }
                     }
                 }
-                //Проверка на точките на играч 1!
+                //Проверка на точките на играч 2!
                 if (mistakes2 != 3) {
                     if (capitalsInAsia[number][1].equalsIgnoreCase(capital2)) {
                         score2++;
@@ -436,16 +513,262 @@ public class SecondProject {
                         System.out.println("Точките на " + nameOfSecondPlayer + " са: " + score2);
                         System.out.println("");
                     }
-                    //Проверка на животите на играч 1!
+                    //Проверка на животите на играч 2!
                     else {
                         mistakes2++;
                         System.out.println("Грешен отговор за " + nameOfSecondPlayer + "!");
                         if (mistakes2 == 1) {
-                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живота");
                             System.out.println("");
                         }
                         if (mistakes2 == 2) {
-                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живот");
+                            System.out.println("");
+                        }
+                        if (mistakes2 == 3) {
+                            System.out.println(nameOfSecondPlayer + " няма останали животи!");
+                            System.out.println(" ");
+                        }
+                    }
+                }
+            }
+        }
+
+        //Държави в Северна Америка
+
+        if (continent.equalsIgnoreCase(northAmerica)) {
+            while (mistakes1 != 3 || mistakes2 != 3) {
+                number = rand.nextInt(capitalsInNorthAmerica.length);
+                System.out.println("Напишете столицата на:");
+                System.out.println(capitalsInNorthAmerica[number][0]);
+                //Играч 1 въвежда столицата на държавата
+                if (mistakes1 != 3) {
+                    System.out.println("Ред е на " + nameOfFirstPlayer + "!");
+                    do {
+                        capital1 = input.nextLine();
+                        if (!capital1.matches(regex)) {
+                            System.out.println("Използвай букви (кирилица)");
+                        }
+                    } while (!capital1.matches(regex));
+                }
+                //Играч 2 въвежда столицата на държавата
+                if (mistakes2 != 3) {
+                    System.out.println("Ред е на " + nameOfSecondPlayer + "!");
+                    do {
+                        capital2 = input.nextLine();
+                        if (!capital2.matches(regex)) {
+                            System.out.println("Използвай букви (кирилица)");
+                        }
+                    } while (!capital2.matches(regex));
+                }
+                //Проверка на точките на играч 1!
+                if (mistakes1 != 3) {
+                    if (capitalsInNorthAmerica[number][1].equalsIgnoreCase(capital1)) {
+                        score1++;
+                        System.out.println("Верен отговор за " + nameOfFirstPlayer + " !");
+                        System.out.println("Точките на " + nameOfFirstPlayer + " са: " + score1);
+                        System.out.println("");
+                    }
+                    //Проверка на животите на играч 1!
+                    else {
+                        mistakes1++;
+                        System.out.println("Грешен отговор за " + nameOfFirstPlayer + "!");
+                        if (mistakes1 == 1) {
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println("");
+                        }
+                        if (mistakes1 == 2) {
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живот");
+                            System.out.println("");
+                        }
+                        if (mistakes1 == 3) {
+                            System.out.println(nameOfFirstPlayer + " няма останали животи!");
+                            System.out.println(" ");
+                        }
+                    }
+                }
+                //Проверка на точките на играч 2!
+                if (mistakes2 != 3) {
+                    if (capitalsInNorthAmerica[number][1].equalsIgnoreCase(capital2)) {
+                        score2++;
+                        System.out.println("Верен отговор за " + nameOfSecondPlayer + "!");
+                        System.out.println("Точките на " + nameOfSecondPlayer + " са: " + score2);
+                        System.out.println("");
+                    }
+                    //Проверка на животите на играч 2!
+                    else {
+                        mistakes2++;
+                        System.out.println("Грешен отговор за " + nameOfSecondPlayer + "!");
+                        if (mistakes2 == 1) {
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живота");
+                            System.out.println("");
+                        }
+                        if (mistakes2 == 2) {
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живот");
+                            System.out.println("");
+                        }
+                        if (mistakes2 == 3) {
+                            System.out.println(nameOfSecondPlayer + " няма останали животи!");
+                            System.out.println(" ");
+                        }
+                    }
+                }
+            }
+        }
+
+        //Държави в Южна Америка
+
+        if (continent.equalsIgnoreCase(southAmerica)) {
+            while (mistakes1 != 3 || mistakes2 != 3) {
+                number = rand.nextInt(capitalsInSouthAmerica.length);
+                System.out.println("Напишете столицата на:");
+                System.out.println(capitalsInSouthAmerica[number][0]);
+                //Играч 1 въвежда столицата на държавата
+                if (mistakes1 != 3) {
+                    System.out.println("Ред е на " + nameOfFirstPlayer + "!");
+                    do {
+                        capital1 = input.nextLine();
+                        if (!capital1.matches(regex)) {
+                            System.out.println("Използвай букви (кирилица)");
+                        }
+                    } while (!capital1.matches(regex));
+                }
+                //Играч 2 въвежда столицата на държавата
+                if (mistakes2 != 3) {
+                    System.out.println("Ред е на " + nameOfSecondPlayer + "!");
+                    do {
+                        capital2 = input.nextLine();
+                        if (!capital2.matches(regex)) {
+                            System.out.println("Използвай букви (кирилица)");
+                        }
+                    } while (!capital2.matches(regex));
+                }
+                //Проверка на точките на играч 1!
+                if (mistakes1 != 3) {
+                    if (capitalsInSouthAmerica[number][1].equalsIgnoreCase(capital1)) {
+                        score1++;
+                        System.out.println("Верен отговор за " + nameOfFirstPlayer + " !");
+                        System.out.println("Точките на " + nameOfFirstPlayer + " са: " + score1);
+                        System.out.println("");
+                    }
+                    //Проверка на животите на играч 1!
+                    else {
+                        mistakes1++;
+                        System.out.println("Грешен отговор за " + nameOfFirstPlayer + "!");
+                        if (mistakes1 == 1) {
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println("");
+                        }
+                        if (mistakes1 == 2) {
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живот");
+                            System.out.println("");
+                        }
+                        if (mistakes1 == 3) {
+                            System.out.println(nameOfFirstPlayer + " няма останали животи!");
+                            System.out.println(" ");
+                        }
+                    }
+                }
+                //Проверка на точките на играч 2!
+                if (mistakes2 != 3) {
+                    if (capitalsInSouthAmerica[number][1].equalsIgnoreCase(capital2)) {
+                        score2++;
+                        System.out.println("Верен отговор за " + nameOfSecondPlayer + "!");
+                        System.out.println("Точките на " + nameOfSecondPlayer + " са: " + score2);
+                        System.out.println("");
+                    }
+                    //Проверка на животите на играч 2!
+                    else {
+                        mistakes2++;
+                        System.out.println("Грешен отговор за " + nameOfSecondPlayer + "!");
+                        if (mistakes2 == 1) {
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живота");
+                            System.out.println("");
+                        }
+                        if (mistakes2 == 2) {
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живот");
+                            System.out.println("");
+                        }
+                        if (mistakes2 == 3) {
+                            System.out.println(nameOfSecondPlayer + " няма останали животи!");
+                            System.out.println(" ");
+                        }
+                    }
+                }
+            }
+        }
+
+        //Държави в Австралия и Океания
+
+        if (continent.equalsIgnoreCase(australiaAndOceania)) {
+            while (mistakes1 != 3 || mistakes2 != 3) {
+                number = rand.nextInt(capitalsInAustraliaAndOceania.length);
+                System.out.println("Напишете столицата на:");
+                System.out.println(capitalsInAustraliaAndOceania[number][0]);
+                //Играч 1 въвежда столицата на държавата
+                if (mistakes1 != 3) {
+                    System.out.println("Ред е на " + nameOfFirstPlayer + "!");
+                    do {
+                        capital1 = input.nextLine();
+                        if (!capital1.matches(regex)) {
+                            System.out.println("Използвай букви (кирилица)");
+                        }
+                    } while (!capital1.matches(regex));
+                }
+                //Играч 2 въвежда столицата на държавата
+                if (mistakes2 != 3) {
+                    System.out.println("Ред е на " + nameOfSecondPlayer + "!");
+                    do {
+                        capital2 = input.nextLine();
+                        if (!capital2.matches(regex)) {
+                            System.out.println("Използвай букви (кирилица)");
+                        }
+                    } while (!capital2.matches(regex));
+                }
+                //Проверка на точките на играч 1!
+                if (mistakes1 != 3) {
+                    if (capitalsInAustraliaAndOceania[number][1].equalsIgnoreCase(capital1)) {
+                        score1++;
+                        System.out.println("Верен отговор за " + nameOfFirstPlayer + " !");
+                        System.out.println("Точките на " + nameOfFirstPlayer + " са: " + score1);
+                        System.out.println("");
+                    }
+                    //Проверка на животите на играч 1!
+                    else {
+                        mistakes1++;
+                        System.out.println("Грешен отговор за " + nameOfFirstPlayer + "!");
+                        if (mistakes1 == 1) {
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живота");
+                            System.out.println("");
+                        }
+                        if (mistakes1 == 2) {
+                            System.out.println(nameOfFirstPlayer + " има още " + (3 - mistakes1) + " живот");
+                            System.out.println("");
+                        }
+                        if (mistakes1 == 3) {
+                            System.out.println(nameOfFirstPlayer + " няма останали животи!");
+                            System.out.println(" ");
+                        }
+                    }
+                }
+                //Проверка на точките на играч 2!
+                if (mistakes2 != 3) {
+                    if (capitalsInAustraliaAndOceania[number][1].equalsIgnoreCase(capital2)) {
+                        score2++;
+                        System.out.println("Верен отговор за " + nameOfSecondPlayer + "!");
+                        System.out.println("Точките на " + nameOfSecondPlayer + " са: " + score2);
+                        System.out.println("");
+                    }
+                    //Проверка на животите на играч 2!
+                    else {
+                        mistakes2++;
+                        System.out.println("Грешен отговор за " + nameOfSecondPlayer + "!");
+                        if (mistakes2 == 1) {
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живота");
+                            System.out.println("");
+                        }
+                        if (mistakes2 == 2) {
+                            System.out.println(nameOfSecondPlayer + " има още " + (3 - mistakes2) + " живот");
                             System.out.println("");
                         }
                         if (mistakes2 == 3) {
@@ -460,6 +783,16 @@ public class SecondProject {
         //краен резултат:
         System.out.println("Крайните точки на " + nameOfFirstPlayer + " са: " + score1);
         System.out.println("Крайните точки на " + nameOfSecondPlayer + " са: " + score2);
+
+        if (score1 > score2) {
+            System.out.println(nameOfFirstPlayer + " печели!");
+        }
+        if (score1 == score2) {
+            System.out.println("Играчите са равни!");
+        }
+        if (score1 < score2) {
+            System.out.println(nameOfSecondPlayer + " печели!");
+        }
     }
 }
 

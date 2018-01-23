@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class SecondProject {
+public class ПознайСтолицата {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 

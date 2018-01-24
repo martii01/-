@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
+import java.util.Random;
+
 public class ПознайСтолицатаИнтерфейс extends Application {
 
     Stage window;
@@ -17,6 +19,7 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
     Label player1, player2, live1, live2, score1, score2, country, messageForAllCountries;
     GridPane europeGridPane, asiaGridPane, africaGridPane, northAmericaGridPane, southAmericaGridPane,
             australiaAndOceaniaGridPane;
+    Button checking;
 
 
     public static void main(String[] args) {
@@ -28,6 +31,18 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Random rand = new Random();
+        int livesOfPlayer1 = 3;
+        int livesOfPlayer2 = 3;
+        int scoreOfPlayer1 = 0;
+        int scoreOfPlayer2 = 0;
+        int numberForEurope;
+        int numberForAsia;
+        int numberForAfrica;
+        int numberForNorthAmerica;
+        int numberForSouthAmerica;
+        int numberForAustraliaAndOceania;
+
         window = primaryStage;
         window.setTitle("Познай столицата");
 //Starting the first window!
@@ -130,18 +145,92 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 //Ending the second window
 
 //Starting the Europe window
+
+        java.lang.String capitalsInEurope[][] = {
+                {"Русия", "Москва"},
+                {"Украйна", "Киев"},
+                {"Франция", "Париж"},
+                {"Испания", "Мадрид"},
+                {"Швеция", "Стокхолм"},
+                {"Норвегия", "Осло"},
+                {"Германия", "Берлин"},
+                {"Финландия", "Хелзинги"},
+                {"Полша", "Варшава"},
+                {"Италия", "Рим"},
+                {"Великобритания", "Лондон"},
+                {"Румъния", "Букурещ"},
+                {"Беларус", "Минск"},
+                {"Гърция", "Атина"},
+                {"България", "София"},
+                {"Исландия", "Рейкявик"},
+                {"Унгария", "Будапеща"},
+                {"Португалия", "Лисабон"},
+                {"Сърбия", "Белград"},
+                {"Азербайджан", "Баку"},
+                {"Австрия", "Виена"},
+                {"Чехия", "Прага"},
+                {"Ирландия", "Дъблин"},
+                {"Литва", "Вилнюс"},
+                {"Латвия", "Рига"},
+                {"Хърватия", "Загреб"},
+                {"Босна и Херцеговина", "Сараево"},
+                {"Словакия", "Братислава"},
+                {"Естония", "Талин"},
+                {"Дания", "Копенхаген"},
+                {"Нидерландия", "Амстердам"},
+                {"Швейцария", "Берн"},
+                {"Молдова", "Кишинев"},
+                {"Белгия", "Брюксел"},
+                {"Албания", "Тирана"},
+                {"Македония", "Скопие"},
+                {"Турция", "Анкара"},
+                {"Словения", "Любляна"},
+                {"Черна гора", "Подгорица"},
+                {"Кипър", "Никозия"},
+                {"Люксембург", "Люксембург"},
+                {"Андора", "Андора ла Веля"},
+                {"Малта", "Валета"},
+                {"Лихтенщайн", "Вадуц"},
+                {"Сан Марино", "Сан Марино"},
+                {"Монако", "Монако"},
+                {"Косово", "Прищина"}
+        };
+
         europeGridPane = new GridPane();
         europeGridPane.setPadding(new Insets(10, 10, 10, 10));
         europeGridPane.setVgap(8);
         europeGridPane.setHgap(12);
+
+        //Бутон за проверка
+        checking = new Button("Проверка");
+        GridPane.setConstraints(checking, 0 ,12);
 
         //Съобщение до всички играчи
         messageForAllCountries = new Label("Държавата, която трябва да познаете е:");
         GridPane.setConstraints(messageForAllCountries, 0, 0);
 
         //Познаване на столицата
-        country = new Label("");
-        GridPane.setConstraints(country, 1, 0);
+
+        while (livesOfPlayer1 != 0 || livesOfPlayer2 != 0) {
+            numberForEurope= rand.nextInt(capitalsInEurope.length -1);
+            checking.setOnAction(e ->window.setScene(asiaScene));
+            country = new Label(capitalsInEurope[numberForEurope][0]);
+            GridPane.setConstraints(country, 1, 0);
+            if (capitalsInEurope[capitalsInEurope.length - 1][1].equalsIgnoreCase(java.lang.String
+                    .valueOf(capital1))) {
+                scoreOfPlayer1++;
+            } else {
+                livesOfPlayer1--;
+            }
+            if (capitalsInEurope[capitalsInEurope.length - 1][1].equalsIgnoreCase(java.lang.String
+                    .valueOf(capital2))) {
+                scoreOfPlayer2++;
+            } else {
+                livesOfPlayer2--;
+            }
+
+        }
+
 
         //Играч 1:
         player1 = new Label();
@@ -155,12 +244,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Точки на играч 1:
         score1 = new Label();
-        score1.setText("Точки на 1 играч са: ");
+        score1.setText("Точки: " + scoreOfPlayer1);
         GridPane.setConstraints(score1, 0, 10);
 
         //Точки на играч 2:
         score2 = new Label();
-        score2.setText("Точки на 2 играч са: ");
+        score2.setText("Точки: " + scoreOfPlayer2);
         GridPane.setConstraints(score2, 2, 10);
 
         //TextField for capital1
@@ -175,21 +264,74 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Животи на играч 1:
         live1 = new Label();
-        live1.setText("Животите на 1 играч са: ");
+        live1.setText("Оставащи животи: " + livesOfPlayer1);
         GridPane.setConstraints(live1, 0, 8);
 
         //Животи на играч 2:
         live2 = new Label();
-        live2.setText("Животите на 2 играч са: ");
+        live2.setText("Оставащи животи: " + livesOfPlayer2);
         GridPane.setConstraints(live2, 2, 8);
 
         //Showing the Europe window:
         europeGridPane.getChildren().addAll(messageForAllCountries, player1, player2, score1, score2, country,
-                capital1, capital2, live1, live2);
+                capital1, capital2, live1, live2, checking);
 
         europeScene = new Scene(europeGridPane, 600, 800);
 //Ending the Europe window
 //Starting the Asia window
+
+        java.lang.String capitalsInAsia[][] = {
+                {"Казахстан", "Астана"},
+                {"Киргизстан", "Бишкек"},
+                {"Таджикистан", "Душанбе"},
+                {"Туркменистан", "Ашхабат"},
+                {"Узбекистан", "Ташкент"},
+                {"Китай", "Пекин"},
+                {"Монголия", "Улан Батор"},
+                {"Северна Корея", "Пхенян"},
+                {"Тайван", "Тайпе"},
+                {"Южна Корея", "Сеул"},
+                {"Япония", "Токио"},
+                {"Русия", "Москва"},
+                {"Бруней", "Бандар Сери Бегаван"},
+                {"Виетнам", "Ханой"},
+                {"Източен Тимор", "Дили"},
+                {"Индонезия", "Джакарта"},
+                {"Камбоджа", "Пном Пен"},
+                {"Лаос", "Виентян"},
+                {"Малайзия", "Куала Лумпур"},
+                {"Мианмар", "Найпидо"},
+                {"Сингапур", "Сингапур"},
+                {"Тайланд", "Банкок"},
+                {"Филипини", "Манила"},
+                {"Афганистан", "Кабул"},
+                {"Бангладеш", "Дака"},
+                {"Бутан", "Тхимпху"},
+                {"Индия", "Делхи"},
+                {"Малдиви", "Мале"},
+                {"Непал", "Катманду"},
+                {"Пакистан", "Исламабад"},
+                {"Шри Ланка", "Шри Джаяварданапура Коте"},
+                {"Абхазия", "Сухуми"},
+                {"Азербайджан", "Баку"},
+                {"Армения", "Ереван"},
+                {"Бахрейн", "Манама"},
+                {"Израел", "Йерусалим"},
+                {"Ирак", "Багдад"},
+                {"Иран", "Техеран"},
+                {"Йемен", "Сана"},
+                {"Йордания", "Аман"},
+                {"Катар", "Доха"},
+                {"Кувейт", "Кувейт"},
+                {"Ливан", "Бейрут"},
+                {"Нагорни Карабах", "Степанакерт"},
+                {"Обединени арабски емирства", "Абу Даби"},
+                {"Оман", "Маскат"},
+                {"Палестинска автономия", "Рамала"},
+                {"Саудитска Арабия", "Рияд"},
+                {"Сирия", "Дамаск"},
+                {"Турция", "Анкара"},
+        };
         asiaGridPane = new GridPane();
         asiaGridPane.setPadding(new Insets(10, 10, 10, 10));
         asiaGridPane.setVgap(8);
@@ -200,7 +342,8 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         GridPane.setConstraints(messageForAllCountries, 0, 0);
 
         //Познаване на столицата
-        country = new Label("");
+        country = new Label(capitalsInAsia[capitalsInAsia.length - 1][0]);
+
         GridPane.setConstraints(country, 1, 0);
 
         //Играч 1:
@@ -215,12 +358,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Точки на играч 1:
         score1 = new Label();
-        score1.setText("Точки на 1 играч са: ");
+        score1.setText("Точки: " + scoreOfPlayer1);
         GridPane.setConstraints(score1, 0, 10);
 
         //Точки на играч 2:
         score2 = new Label();
-        score2.setText("Точки на 2 играч са: ");
+        score2.setText("Точки: " + scoreOfPlayer2);
         GridPane.setConstraints(score2, 2, 10);
 
         //TextField for capital1
@@ -235,12 +378,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Животи на играч 1:
         live1 = new Label();
-        live1.setText("Животите на 1 играч са: ");
+        live1.setText("Оставащи животи: " + livesOfPlayer1);
         GridPane.setConstraints(live1, 0, 8);
 
         //Животи на играч 2:
         live2 = new Label();
-        live2.setText("Животите на 2 играч са: ");
+        live2.setText("Оставащи животи: " + livesOfPlayer2);
         GridPane.setConstraints(live2, 2, 8);
 
         //Showing the Europe window:
@@ -250,6 +393,64 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         asiaScene = new Scene(asiaGridPane, 600, 800);
 //Ending the Asia window
 //Starting the Africa window
+
+        java.lang.String capitalsInAfrica[][] = {
+                {"Египет", "Кайро"},
+                {"Алжир", "Алжир"},
+                {"Ангола", "Луанда"},
+                {"Бенин", "Порто Ново"},
+                {"Ботсвана", "Габороне"},
+                {"Буркина Фасо", "Уагадугу"},
+                {"Бурунди", "Бужумбура"},
+                {"Габон", "Либървил"},
+                {"Гамбия", "Банджул"},
+                {"Гана", "Акра"},
+                {"Гвинея", "Конакри"},
+                {"Гвинея-Бисау", "Бисау"},
+                {"Демократична република Конго", "Киншаса"},
+                {"Джибути", "Джибути"},
+                {"Екваториална Гвинея", "Малабо"},
+                {"Еритрея", "Асмара"},
+                {"Етиопия", "Адис Абеба"},
+                {"Замбия", "Лусака"},
+                {"Зимбабве", "Хараре"},
+                {"Кабо Верде", "Прая"},
+                {"Камерун", "Яунде"},
+                {"Кения", "Найроби"},
+                {"Коморски острови", "Морони"},
+                {"Кот д'Ивоар", "Ямусукро"},
+                {"Лесото", "Масеру"},
+                {"Либерия", "Монровия"},
+                {"Либия", "Триполи"},
+                {"Мадагаскар", "Антананариву"},
+                {"Мавритания", "Нуакшот"},
+                {"Мавриций", "Порт Луи"},
+                {"Малави", "Лилонгве"},
+                {"Мали", "Бамако"},
+                {"Мароко", "Рабат"},
+                {"Мозамбик", "Мапуто"},
+                {"Намибия", "Виндхук"},
+                {"Нигер", "Ниамей"},
+                {"Нигерия", "Абуджа"},
+                {"Конго", "Бразавил"},
+                {"Руанда", "Кигали"},
+                {"Сао Томе и Принсипи", "Сао Томе"},
+                {"Свазиленд", "Мбабане"},
+                {"Сейшели", "Виктория"},
+                {"Сенегал", "Дакар"},
+                {"Сиера Леоне", "Фрийтаун"},
+                {"Сомалия", "Могадишу"},
+                {"Судан", "Хартум"},
+                {"Танзания", "Додома"},
+                {"Того", "Ломе"},
+                {"Тунис", "Тунис"},
+                {"Уганда", "Кампала"},
+                {"Централноафриканска република", "Банги"},
+                {"Чад", "Нджамена"},
+                {"Република Южна Африка", "Претория"},
+                {"Южен Судан", "Джуба"},
+
+        };
         africaGridPane = new GridPane();
         africaGridPane.setPadding(new Insets(10, 10, 10, 10));
         africaGridPane.setVgap(8);
@@ -260,7 +461,7 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         GridPane.setConstraints(messageForAllCountries, 0, 0);
 
         //Познаване на столицата
-        country = new Label("");
+        country = new Label(capitalsInAfrica[capitalsInAfrica.length - 1][0]);
         GridPane.setConstraints(country, 1, 0);
 
         //Играч 1:
@@ -275,12 +476,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Точки на играч 1:
         score1 = new Label();
-        score1.setText("Точки на 1 играч са: ");
+        score1.setText("Точки: " + scoreOfPlayer1);
         GridPane.setConstraints(score1, 0, 10);
 
         //Точки на играч 2:
         score2 = new Label();
-        score2.setText("Точки на 2 играч са: ");
+        score2.setText("Точки: " + scoreOfPlayer2);
         GridPane.setConstraints(score2, 2, 10);
 
         //TextField for capital1
@@ -295,12 +496,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Животи на играч 1:
         live1 = new Label();
-        live1.setText("Животите на 1 играч са: ");
+        live1.setText("Оставащи животи: " + livesOfPlayer1);
         GridPane.setConstraints(live1, 0, 8);
 
         //Животи на играч 2:
         live2 = new Label();
-        live2.setText("Животите на 2 играч са: ");
+        live2.setText("Оставащи животи: " + livesOfPlayer2);
         GridPane.setConstraints(live2, 2, 8);
 
         //Showing the Europe window:
@@ -310,6 +511,39 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         africaScene = new Scene(africaGridPane, 600, 800);
 //Ending the Africa window
 // Starting the North America window
+
+        java.lang.String capitalsInNorthAmerica[][] = {
+                {"Американски Вирджински острови", "Шарлот Амали"},
+                {"Ангуила", "Вали"},
+                {"Антигуа и Барбуда", "Сейнт Джонс"},
+                {"Гватемала", "Гватемала"},
+                {"Барбадос", "Бриджтаун"},
+                {"Бахамски острови", "Насау"},
+                {"Белиз", "Белмопан"},
+                {"Гренада", "Сейнт Джорджис"},
+                {"Гренландия", "Нуук"},
+                {"Доминика", "Розо"},
+                {"Доминиканска република", "Санто Доминго"},
+                {"Канада", "Отава"},
+                {"Коста Рика", "Сан Хосе"},
+                {"Куба", "Хавана"},
+                {"Кюрасао", "Филипсбург"},
+                {"Мексико", "Мексико"},
+                {"Никарагуа", "Манагуа"},
+                {"Панама", "Панама"},
+                {"Пуерто Рико", "Сан Хуан"},
+                {"Салвадор", "Сан Салвадор"},
+                {"Сейнт Винсент и Гренадини", "Кингстаун"},
+                {"Сейнт Китс и Невис", "Бастер"},
+                {"Сейнт Лусия", "Кастрийс"},
+                {"Синт Мартен", "Филипсбург"},
+                {"Съединени американски щати", "Вашингтон"},
+                {"Тринидад и Тобаго", "Порт ъф Спейн"},
+                {"Хаити", "Порт о Пренс"},
+                {"Хондурас", "Тегусигалпа"},
+                {"Ямайка", "Кингстън"},
+                {"Аруба", "Оранестад"}
+        };
         northAmericaGridPane = new GridPane();
         northAmericaGridPane.setPadding(new Insets(10, 10, 10, 10));
         northAmericaGridPane.setVgap(8);
@@ -320,7 +554,7 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         GridPane.setConstraints(messageForAllCountries, 0, 0);
 
         //Познаване на столицата
-        country = new Label("");
+        country = new Label(capitalsInNorthAmerica[capitalsInNorthAmerica.length - 1][0]);
         GridPane.setConstraints(country, 1, 0);
 
         //Играч 1:
@@ -335,12 +569,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Точки на играч 1:
         score1 = new Label();
-        score1.setText("Точки на 1 играч са: ");
+        score1.setText("Точки: " + scoreOfPlayer1);
         GridPane.setConstraints(score1, 0, 10);
 
         //Точки на играч 2:
         score2 = new Label();
-        score2.setText("Точки на 2 играч са: ");
+        score2.setText("Точки: " + scoreOfPlayer2);
         GridPane.setConstraints(score2, 2, 10);
 
         //TextField for capital1
@@ -355,12 +589,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Животи на играч 1:
         live1 = new Label();
-        live1.setText("Животите на 1 играч са: ");
+        live1.setText("Оставащи животи: " + livesOfPlayer1);
         GridPane.setConstraints(live1, 0, 8);
 
         //Животи на играч 2:
         live2 = new Label();
-        live2.setText("Животите на 2 играч са: ");
+        live2.setText("Оставащи животи: " + livesOfPlayer2);
         GridPane.setConstraints(live2, 2, 8);
 
         //Showing the Europe window:
@@ -370,6 +604,22 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         northAmericaScene = new Scene(northAmericaGridPane, 600, 800);
 //Ending the North America window
 // Starting the South America window
+
+        java.lang.String capitalsInSouthAmerica[][] = {
+                {"Аржентина", "Буенос Айрес"},
+                {"Боливия", "Сукре"},
+                {"Бразилия", "Бразилия"},
+                {"Венецуела", "Каракас"},
+                {"Гвиана", "Джорджтаун"},
+                {"Еквадор", "Кито"},
+                {"Колумбия", "Богота"},
+                {"Панама", "Панама"},
+                {"Парагвай", "Асунсион"},
+                {"Перу", "Лима"},
+                {"Суринам", "Парамарибо"},
+                {"Уругвай", "Монтевидео"},
+                {"Чили", "Сантяго де Чиле"},
+        };
         southAmericaGridPane = new GridPane();
         southAmericaGridPane.setPadding(new Insets(10, 10, 10, 10));
         southAmericaGridPane.setVgap(8);
@@ -380,7 +630,7 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         GridPane.setConstraints(messageForAllCountries, 0, 0);
 
         //Познаване на столицата
-        country = new Label("");
+        country = new Label(capitalsInSouthAmerica[capitalsInSouthAmerica.length - 1][0]);
         GridPane.setConstraints(country, 1, 0);
 
         //Играч 1:
@@ -395,12 +645,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Точки на играч 1:
         score1 = new Label();
-        score1.setText("Точки на 1 играч са: ");
+        score1.setText("Точки: " + scoreOfPlayer1);
         GridPane.setConstraints(score1, 0, 10);
 
         //Точки на играч 2:
         score2 = new Label();
-        score2.setText("Точки на 2 играч са: ");
+        score2.setText("Точки: " + scoreOfPlayer2);
         GridPane.setConstraints(score2, 2, 10);
 
         //TextField for capital1
@@ -415,12 +665,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Животи на играч 1:
         live1 = new Label();
-        live1.setText("Животите на 1 играч са: ");
+        live1.setText("Оставащи животи: " + livesOfPlayer1);
         GridPane.setConstraints(live1, 0, 8);
 
         //Животи на играч 2:
         live2 = new Label();
-        live2.setText("Животите на 2 играч са: ");
+        live2.setText("Оставащи животи: " + livesOfPlayer2);
         GridPane.setConstraints(live2, 2, 8);
 
         //Showing the Europe window:
@@ -429,7 +679,26 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         southAmericaScene = new Scene(southAmericaGridPane, 600, 800);
 //Ending the Africa window
-// Starting the Africa window
+// Starting the AustraliaAndOceania window
+
+        java.lang.String capitalsInAustraliaAndOceania[][] = {
+                {"Австралия", "Канбера"},
+                {"Нова Зеландия", "Уелингтън"},
+                {"Индонезия", "Джакарта"},
+                {"Фиджи", "Сува"},
+                {"Нова Каледония", "Нумеа"},
+                {"Папуа Нова Гвинея", "Порт Морсби"},
+                {"Соломонови острови", "Хониара"},
+                {"Вануату", "Порт Вила"},
+                {"Микронезия", "Паликир"},
+                {"Кирибати", "Южна Тарауа"},
+                {"Маршалови острови", "Маджуро"},
+                {"Науру", "Ярен"},
+                {"Палау", "Мелекеок"},
+                {"Самоа", "Апия"},
+                {"Тонга", "Нуку'алофа"},
+                {"Тувалу", "Фунафути"},
+        };
         australiaAndOceaniaGridPane = new GridPane();
         australiaAndOceaniaGridPane.setPadding(new Insets(10, 10, 10, 10));
         australiaAndOceaniaGridPane.setVgap(8);
@@ -440,7 +709,7 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         GridPane.setConstraints(messageForAllCountries, 0, 0);
 
         //Познаване на столицата
-        country = new Label("");
+        country = new Label(capitalsInAustraliaAndOceania[capitalsInAustraliaAndOceania.length - 1][0]);
         GridPane.setConstraints(country, 1, 0);
 
         //Играч 1:
@@ -455,12 +724,12 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Точки на играч 1:
         score1 = new Label();
-        score1.setText("Точки на 1 играч са: ");
+        score1.setText("Точки: " + scoreOfPlayer1);
         GridPane.setConstraints(score1, 0, 10);
 
         //Точки на играч 2:
         score2 = new Label();
-        score2.setText("Точки на 2 играч са: ");
+        score2.setText("Точки: " + scoreOfPlayer2);
         GridPane.setConstraints(score2, 2, 10);
 
         //TextField for capital1
@@ -475,15 +744,15 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Животи на играч 1:
         live1 = new Label();
-        live1.setText("Животите на 1 играч са: ");
+        live1.setText("Оставащи животи: " + livesOfPlayer1);
         GridPane.setConstraints(live1, 0, 8);
 
         //Животи на играч 2:
         live2 = new Label();
-        live2.setText("Животите на 2 играч са: ");
+        live2.setText("Оставащи животи: " + livesOfPlayer2);
         GridPane.setConstraints(live2, 2, 8);
 
-        //Showing the Europe window:
+        //Showing the AustraliaAndOceania window:
         australiaAndOceaniaGridPane.getChildren().addAll(messageForAllCountries, player1, player2, score1, score2, country,
                 capital1, capital2, live1, live2);
 

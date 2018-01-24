@@ -75,18 +75,19 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
         Button playersButton = new Button("Играчите са:");
         GridPane.setConstraints(playersButton, 0, 6);
 
-        playersButton.setOnAction(e -> System.out.println("Името на играч 1 е: " + nameOfPlayerOne.getText() +
-                '\n' + "Името на играч 2 е: " + nameOfPlayerTwo.getText()));
-
         //Button to continue to another window:
         Button continueButton = new Button("Продължете :)");
         GridPane.setConstraints(continueButton, 1, 6);
 
-        continueButton.setOnAction(e -> window.setScene(continentScene));
+        continueButton.setOnAction(e -> {
+            System.out.println("Името на играч 1 е: " + nameOfPlayerOne.getText() +
+                    '\n' + "Името на играч 2 е: " + nameOfPlayerTwo.getText());
+            window.setScene(continentScene);
+        });
 
         //Showing the first window
         StartingGridPane.getChildren().addAll(inputMessage, playerOneMessage, nameOfPlayerOne,
-                playerTwoMessage, nameOfPlayerTwo, continueButton, playersButton);
+                playerTwoMessage, nameOfPlayerTwo, continueButton);
 
         Scene inputNamesScene = new Scene(StartingGridPane, 485, 200);
 //Ending the first window
@@ -211,25 +212,25 @@ public class ПознайСтолицатаИнтерфейс extends Applicatio
 
         //Познаване на столицата
 
-        while (livesOfPlayer1 != 0 || livesOfPlayer2 != 0) {
-            numberForEurope= rand.nextInt(capitalsInEurope.length -1);
-            checking.setOnAction(e ->window.setScene(asiaScene));
-            country = new Label(capitalsInEurope[numberForEurope][0]);
-            GridPane.setConstraints(country, 1, 0);
-            if (capitalsInEurope[capitalsInEurope.length - 1][1].equalsIgnoreCase(java.lang.String
-                    .valueOf(capital1))) {
-                scoreOfPlayer1++;
-            } else {
-                livesOfPlayer1--;
-            }
-            if (capitalsInEurope[capitalsInEurope.length - 1][1].equalsIgnoreCase(java.lang.String
-                    .valueOf(capital2))) {
-                scoreOfPlayer2++;
-            } else {
-                livesOfPlayer2--;
-            }
+            while (livesOfPlayer1 != 0 || livesOfPlayer2 != 0) {
+                numberForEurope = rand.nextInt(capitalsInEurope.length - 1);
+                checking.setOnAction(e -> window.setScene(asiaScene));
+                country = new Label(capitalsInEurope[numberForEurope][0]);
+                GridPane.setConstraints(country, 1, 0);
+                if (capitalsInEurope[capitalsInEurope.length - 1][1].equalsIgnoreCase(java.lang.String
+                        .valueOf(capital1))) {
+                    scoreOfPlayer1++;
+                } else {
+                    livesOfPlayer1--;
+                }
+                if (capitalsInEurope[capitalsInEurope.length - 1][1].equalsIgnoreCase(java.lang.String
+                        .valueOf(capital2))) {
+                    scoreOfPlayer2++;
+                } else {
+                    livesOfPlayer2--;
+                }
 
-        }
+            }
 
 
         //Играч 1:
